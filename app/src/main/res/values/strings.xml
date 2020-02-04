@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SamProj</string>
+    <string name="facebook_application_id" translatable="false">169685760965675</string>
+    <string name="articles">News</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="Profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
