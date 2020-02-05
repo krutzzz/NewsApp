@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SamProj</string>
+    <string name="app_name">4Eng</string>
     <string name="facebook_application_id" translatable="false">169685760965675</string>
     <string name="articles">News</string>
     <string name="dictionary">Dictionary</string>

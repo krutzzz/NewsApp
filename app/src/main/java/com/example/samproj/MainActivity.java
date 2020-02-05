@@ -39,6 +39,8 @@ import android.widget.Toast;
 import java.util.Arrays;
 
 import bolts.Task;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,9 +60,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Realm.init(this);
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+                .name("articles.realm")
+                .schemaVersion(0)
+                .build();
+        Realm.setDefaultConfiguration(realmConfig);
+
+
+
         setContentView(R.layout.activity_main);
         BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottom_bar);
-        bottomNavigationViewEx.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_SELECTED);           //Setting bottomnavigation
+        bottomNavigationViewEx.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_SELECTED);                        //Setting bottom navigation
         bottomNavigationViewEx.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.twitter_blue)));
         bottomNavigationViewEx.setIconsMarginTop(30);
         fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
