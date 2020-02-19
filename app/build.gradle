@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'realm-android'
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.example.samproj"
         minSdkVersion 21
@@ -34,10 +34,13 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.facebook.android:facebook-android-sdk:5.13.0'
     implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
     api 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.novoda:merlin:1.2.0'
 }

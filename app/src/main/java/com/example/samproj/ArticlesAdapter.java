@@ -1,4 +1,4 @@
-package com.example.samproj;
+/*package com.example.samproj;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import java.util.List;*/
 
-public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHolder> {
+/*public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHolder> {
 
     //Recycler View Adapter
 
@@ -118,4 +118,4 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         article.remove(position);
         notifyItemRemoved(position);
     }
-}
+}*/
