@@ -14,6 +14,7 @@ import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.samproj.mservice.NetworkChangeReceiver;
@@ -107,8 +108,11 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }*/
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
+}
 
 
 

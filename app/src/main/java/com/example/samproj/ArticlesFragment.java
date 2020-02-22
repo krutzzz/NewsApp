@@ -1,35 +1,40 @@
 package com.example.samproj;
 
 
+import android.app.SearchManager;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 
+
+import java.util.ArrayList;
 import java.util.List;
 
-import com.example.samproj.mservice.NewsClient;
-import com.example.samproj.mservice.ServiceGenerator;
-import com.example.samproj.model.News;
-import com.example.samproj.model.Result;
+import com.example.samproj.api.ApiClient;
+import com.example.samproj.api.ApiInterface;
+import com.example.samproj.newsapi.Article;
+import com.example.samproj.newsapi.News;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,167 +45,104 @@ import retrofit2.Response;
  */
 public class ArticlesFragment extends Fragment /*implements ArticlesAdapter.ViewHolder.OnItemListener*/ {
 
-    public static final String API_KEY = "2421bc6e-ed0b-4ee1-9566-ce17c4240633";
-    public static final String API_REQUEST_TYPE = "article";
-    public static final String API_BLOCK_TYPE = "body";
-    public static final int BODY_SUMMARY_TEXT_LENGTH_SHORT = 150;
-    public static final int BODY_SUMMARY_TEXT_LENGTH_LONG = 400;
-    Button refreshButton;
-    ImageView refresh_animation;
-    SwipeRefreshLayout swipeRefreshLayout;
+    public static final String API_KEY_NEWS_API = "a8b57cc7be2843c18d1bb628189395d3";
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Article> articles = new ArrayList<>();
+    private MyAdapter adapter;
+    private String TAG = ArticlesFragment.class.getSimpleName();
 
 
     public ArticlesFragment() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        final View view=inflater.inflate(R.layout.fragment_articles, container, false);
-
-        // Find reference to the bottom app bar and set it up as a regular app bar
-        //BottomAppBar bar = findViewById(R.id.bar);
-        //setSupportActionBar(bar);
-
-        // Create and setup the navigation drawer
-        // onCreateNavigationDrawer();
-
-        // Get the current network connectivity info and call make the base call accordingly
-        makeInitialCallWithConnectivityCheck(view);
-        swipeRefreshLayout=view.findViewById(R.id.refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        makeInitialCallWithConnectivityCheck(view);
-                    }
-                }, 4000);
-            }
-        });
-
-        //List<Article> articles=new ArrayList<>();
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        //articles.add(new Article("FirstArticle","It is the first article(actually it is not an article)", R.drawable.ic_news));
-        
-      //  RecyclerView recyclerView=view.findViewById(R.id.articles_list);
-      //  ArticlesAdapter articlesAdapter=new ArticlesAdapter(articles,this);
-      //  RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-      //  itemAnimator.setAddDuration(1000);
-      //  itemAnimator.setRemoveDuration(1000);
-      //  recyclerView.setItemAnimator(itemAnimator);
-      //  recyclerView.setAdapter(articlesAdapter);
-      //  recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-
-
+        final View view = inflater.inflate(R.layout.fragment_articles, container, false);
+        Toolbar toolbar=(Toolbar) view.findViewById(R.id.articles_toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        recyclerView = view.findViewById(R.id.recyclerview);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
+        LoadJson();
         return view;
+
     }
 
-    /*@Override
-    public void OnItemClickListener(int position) {
-        Intent intent=new Intent(getContext(),ArticleViewPage.class);
-        startActivity(intent);
-    }
 
-    @Override
-    public void OnIconClickListener(int position) {
+    public void LoadJson() {
 
-    }*/
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-    /*@Override
-    public void OnIconClickListener(int position) {
-        Toast toast = Toast.makeText(getContext(),
-                "Downloading", Toast.LENGTH_SHORT);
-        toast.show();
-    }*/
+        String country = Utils.getCountry();
 
-    private void makeInitialCallWithConnectivityCheck(final View view){
-        // Create a connectivity manager and get the active network information
+        Call<News> call;
+        call = apiInterface.getNews(country, API_KEY_NEWS_API);
 
-        ConnectivityManager connManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-
-        if (networkInfo != null && networkInfo.isConnected()){
-            makeBaseNetworkCall(view);
-        }
-        else {
-            final TextView noConnectionTextView = view.findViewById(R.id.catalog_hint_no_available_network_connection);
-            noConnectionTextView.setVisibility(View.VISIBLE);
-            refreshButton= view.findViewById(R.id.refresh_button);
-            refreshButton.setVisibility(View.VISIBLE);
-            hideSpinnerFromCatalog(view);
-            refreshButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    noConnectionTextView.setVisibility(View.INVISIBLE);
-                    refreshButton.setVisibility(View.INVISIBLE);
-                    makeBaseNetworkCall(view);
-
-
-
-
-                }
-            });
-
-        }
-    }
-
-    private void makeBaseNetworkCall(final View view){
-        final ListView listView = view.findViewById(R.id.articles_list);
-        //final Handler handler = new Handler();
-
-        // Create a Retrofit client with the ServiceGenerator class
-        NewsClient client = ServiceGenerator.createService(NewsClient.class);
-
-        Call<News> call = client.getBaseJson(API_KEY, API_REQUEST_TYPE, API_BLOCK_TYPE);
-
-        // Call the endpoint and respond to failure and success events
         call.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
-                // Parse the response to match the List of JSONArray objects
-                List<Result> results = response.body().getResponse().getResults();
+                if (response.isSuccessful() && response.body().getArticle() != null) {
+                    if (!articles.isEmpty()) {
+                        articles.clear();
+                    }
 
-                hideSpinnerFromCatalog(view);
+                    articles = response.body().getArticle();
+                    adapter = new MyAdapter(articles, getContext());
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
-
-                // Set the adapter and remove the divider between the list items
-                NewsAdapter adapter = new NewsAdapter(getContext(), results);
-                listView.setDividerHeight(0);
-                listView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getContext(), "No Result!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
 
-
-                hideSpinnerFromCatalog(view);
-                Toast.makeText(getContext(), "There was a problem with the network call", Toast.LENGTH_SHORT).show();
-                Log.e("The throwable is", t.toString());
             }
         });
     }
 
-    /**
-     * Simple helper method to hide the loading spinner from the catalog activity
-     */
-    private void hideSpinnerFromCatalog(View view){
-        ProgressBar spinner = view.findViewById(R.id.loading_spinner);
-        spinner.setVisibility(View.GONE);
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_articles_fragment,menu);
+        SearchManager searchManager=(SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView=(SearchView)menu.findItem(R.id.action_search).getActionView();
+        MenuItem  searchMenuItem=menu.findItem(R.id.action_search);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setQueryHint("Search Latest News...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query.length()>2){
+                    LoadJson();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                LoadJson();
+                return false;
+            }
+        });
+        searchMenuItem.getIcon().setVisible(false,false);
+
+         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
 }
+

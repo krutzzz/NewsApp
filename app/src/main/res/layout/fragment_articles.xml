@@ -8,26 +8,23 @@
     tools:context=".ArticlesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/articles_toolbar"
+            app:menu="@menu/menu_articles_fragment"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:id="@+id/recyclerview"/>
+            android:id="@+id/recyclerview"
+            android:layout_below="@+id/articles_toolbar"/>
 
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+<!--        </LinearLayout>-->
+<!--    </androidx.core.widget.NestedScrollView>-->
 
 
 

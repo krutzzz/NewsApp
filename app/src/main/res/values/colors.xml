@@ -9,4 +9,5 @@
     <color name="background">#ffff</color>
     <color name="blue">#97BAEC</color>
     <color name="background_blue">#BBDFFA</color>
+    <color name="colorTextTitle">#262626</color>
 </resources>

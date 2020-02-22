@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;*/
 
-/*public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHolder> {
+/*public class ArticlesAdapter extends RecyclerView.MyAdapter<ArticlesAdapter.ViewHolder> {
 
-    //Recycler View Adapter
+    //Recycler View MyAdapter
 
     List<Article> article;
     private ViewHolder.OnItemListener onItemListener;

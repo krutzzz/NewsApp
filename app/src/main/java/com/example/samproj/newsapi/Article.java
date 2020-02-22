@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 
-class Article {
+public class Article {
 
     @SerializedName("source")
     @Expose
