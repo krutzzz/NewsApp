@@ -2,118 +2,169 @@ package com.example.samproj;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.facebook.CallbackManager;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.firebase.auth.FirebaseAuth;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.IntentFilter;
-import android.content.res.ColorStateList;
-import android.net.ConnectivityManager;
+import com.example.samproj.api.ApiClient;
+import com.example.samproj.api.ApiInterface;
+import com.example.samproj.newsapi.Article;
+import com.example.samproj.newsapi.News;
+
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
+
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.example.samproj.mservice.NetworkChangeReceiver;
-
-public class MainActivity extends AppCompatActivity {
-
-
-    int RC_SIGN_IN = 0;
-    CallbackManager mCallbackManager;
-    private FirebaseAuth mAuth;
-    final Fragment fragment1 = new ArticlesFragment();
-    final Fragment fragment2 = new DictionaryFragment();
-    final Fragment fragment3 = new ProfileFragment();
-    final FragmentManager fm = getSupportFragmentManager();
-    Fragment active = fragment1;
-    NetworkChangeReceiver broadcastReceiver=new NetworkChangeReceiver();
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+
+    public static final String API_KEY_NEWS_API = "a8b57cc7be2843c18d1bb628189395d3";
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Article> articles = new ArrayList<>();
+    private MyAdapter adapter;
+    private String TAG = MainActivity.class.getSimpleName();
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView topHeadline;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Realm.init(this);
-        //RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-        //        .name("articles.realm")
-        //        .schemaVersion(0)
-        //        .build();
-        //Realm.setDefaultConfiguration(realmConfig);
-
-
 
         setContentView(R.layout.activity_main);
-        BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottom_bar);
-        bottomNavigationViewEx.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_SELECTED);                        //Setting bottom navigation
-        bottomNavigationViewEx.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.twitter_blue)));
-        bottomNavigationViewEx.setIconsMarginTop(30);
-        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
-       // fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
-        bottomNavigationViewEx.setOnNavigationItemSelectedListener(new BottomNavigationViewEx.OnNavigationItemSelectedListener() {
+
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+        topHeadline = findViewById(R.id.topheadelines);
+        layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
+
+        OnLoadingSwipeRefresh("");
+    }
+
+    public void LoadJson(final String keyword) {
+        swipeRefreshLayout.setVisibility(View.INVISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
+        String country = Utils.getCountry();
+        String language = Utils.getLanguage();
+
+        Call<News> call;
+        if (keyword.length() > 0) {
+            call = apiInterface.getNewsSearch(keyword, language, "publishedAt", API_KEY_NEWS_API);
+        } else {
+            call = apiInterface.getNews(country, API_KEY_NEWS_API);
+        }
+        call = apiInterface.getNews(country, API_KEY_NEWS_API);
+
+        call.enqueue(new Callback<News>() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;
-                switch (item.getItemId()) {
-                    case R.id.newsFragment:
-                        fm.beginTransaction().hide(active).show(fragment1).commit();
-                        active = fragment1;
-                        return true;
-                    case R.id.ProfileFragment:
-                        fm.beginTransaction().hide(active).show(fragment3).commit();
-                        active = fragment3;
-                        return true;
+            public void onResponse(Call<News> call, Response<News> response) {
+                if (response.isSuccessful() && response.body().getArticle() != null) {
+                    if (!articles.isEmpty()) {
+                        articles.clear();
+                    }
+
+                    articles = response.body().getArticle();
+                    adapter = new MyAdapter(articles, MainActivity.this);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+                    topHeadline.setVisibility(View.VISIBLE);
+
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    topHeadline.setVisibility(View.INVISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<News> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
+
+
+            }
+        });
+    }
+
+
+    @Override
+    public void onRefresh() {
+        LoadJson("");
+    }
+
+    private void OnLoadingSwipeRefresh(final String keyword){
+
+        swipeRefreshLayout.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadJson(keyword);
+                    }
+                }
+
+        );
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_articles, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        MenuItem searchMenuItem = menu.findItem(R.id.action_search);
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setQueryHint("Search Latest News...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query.length() > 2){
+                    OnLoadingSwipeRefresh(query);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Type more than two letters!", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
         });
-        /*mAuth=FirebaseAuth.getInstance();
-        startActivityForResult(AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(Arrays.asList(
-                        new AuthUI.IdpConfig.GoogleBuilder().build(),
-                        new AuthUI.IdpConfig.EmailBuilder().build(),
-                        new AuthUI.IdpConfig.FacebookBuilder().build()))
-                        .build(),
-                RC_SIGN_IN);
-       */
 
+        searchMenuItem.getIcon().setVisible(false, false);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        IntentFilter filter= new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(broadcastReceiver,filter);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReceiver(broadcastReceiver);
-
-    }
-
-    /*private void loadFragment(Fragment fragment) {
-        // load fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }*/
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 }
-
 
 
 
