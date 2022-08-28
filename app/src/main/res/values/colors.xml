@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffff</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="tab_selected">@color/fui_bgTwitter</color>
+
+    <color name="colorTextTitle">#262626</color>
+    <color name="yellow">#F7D50D</color>
+    <color name="black">#000000</color>
+    <color name="PopularNews">#ea474a</color>
+    <color name="PopularNewsDark">#cf2a2d</color>
+    <color name="iconColor">#E2E2E2</color>
+    <color name="no_connection_textview">#80FF0000</color>
+    <color name="connecting">#80555555</color>
+    <color name="text_preferences">#33555555</color>
+    <color name="grey_track">#338E8E8E</color>
+    <color name="grey_track_faded">#0D8E8E8E</color>
+    <color name="thumb_faded">#33FFFFFF</color>
+    <color name="thumb_faded_stroke">#338E8E8E</color>
+    <color name="track_faded_stroke">#808E8E8E</color>
+    <color name="textview_category_country">#808080</color>
+
+
+
+
+
+    //For blue theming
+    <color name="colorPrimary">#5CACF6</color>
+    <color name="blue_200">#90CAF9</color>
+    <color name="colorAccent">#1e344b</color>
+    <color name="tab_selected">#FF5BAAF4</color>
     <color name="deep_grey">#657786</color>
     <color name="twitter_blue">#1da1f2</color>
     <color name="background">#ffff</color>
     <color name="blue">#97BAEC</color>
     <color name="background_blue">#BBDFFA</color>
-    <color name="colorTextTitle">#262626</color>
+
+    //Blue theming
+    <color name="colorBlueF4">#FF5BAAF4</color>
+    <color name="colorBlueTheme">#FF5BAAF4</color>
+    <color name="colorBlueThemeDark">#1da1f2</color>
+    <color name="colorBlueSecondaryContainer">@color/blue_200</color>
+    <color name="colorBlueSecondaryContainerOpaque">#8090CAF9</color>
+
+    //For green theming
+    <color name="colorGreenTheme">#5AD990</color>
+    <color name="colorGreenThemeDark">#16a763</color>
+    <color name="colorGreenTheme300">#5AD990</color>
+    <color name="colorGreenSecondaryContainer">#8EE4AF</color>
+    <color name="colorGreenSecondaryContainerOpaque">#808EE4AF</color>
+
+    //For brown theming
+    <color name="colorBrownTheme">#7E685A</color>
+    <color name="colorBrownThemeDark">#58483F</color>
+    <color name="colorBrownTheme200">#B1A69F</color>
+    <color name="colorBrownSecondaryContainer">#B1A69F</color>
+    <color name="colorBrownSecondaryContainerOpaque">#80B1A69F</color>
+
+    //For pink theming
+    <color name="colorPinkTheme">#DA7B93</color>
+    <color name="colorPinkThemeDark">#AE6F75</color>
+    <color name="colorPinkTheme100">#EEC2CF</color>
+    <color name="colorPinkSecondaryContainer">#EEC2CF</color>
+    <color name="colorPinkSecondaryContainerOpaque">#80EEC2CF</color>
+
+    //Neutral theming
+    <color name="colorSecondaryVariantNeutral">#C2C2C2</color>
+    <color name="pickedTheme">#8e8e8e</color>
+
 </resources>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.samprojre.screens.settings_screens.settings_screen.SettingsViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.example.samprojre.screens.settings_screens.settings_screen.AdapterSourcesSettings" />
+
+        <variable
+            name="progressVisibilityIndicator"
+            type="int" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.settings_screens.settings_screen.SettingsFragment">
+
+        <LinearLayout
+            android:id="@+id/settings_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/arrowBack_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="Navigate back"
+                android:padding="8dp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:text="@string/settings"
+                android:textColor="@color/background"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/setYourPreferencesTextView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/settings_toolbar"
+            android:background="@color/text_preferences"
+            android:paddingStart="16dp"
+            android:text="@string/set_your_preferences"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/settings_toolbar"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:id="@+id/settingsOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@id/setYourPreferencesTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/country_categoryTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="6dp"
+                    android:autoSizeMaxTextSize="16sp"
+                    android:autoSizeMinTextSize="14sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="1"
+                    android:text="@string/choose_news_by_country_amp_category"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/countryAndCategorySwitch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.example.samprojre.utils.CustomMaterialSwitch
+                    android:id="@+id/countryAndCategorySwitch"
+                    style="@style/Widget.App.Switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:checked="@={viewModel.countryAndCategoryChecked}"
+                    android:enabled="@{!viewModel.sourceChecked}"
+                    android:onCheckedChanged="@{(button, checked)-> viewModel.saveCountryAndCategorySetting(checked)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/enableBySourceTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:autoSizeMaxTextSize="18sp"
+                    android:autoSizeMinTextSize="14sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="1"
+                    android:text="@string/choose_news_by_source"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/sourceSwitch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.example.samprojre.utils.CustomMaterialSwitch
+                    android:id="@+id/sourceSwitch"
+                    style="@style/Widget.App.Switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:checked="@={viewModel.sourceChecked}"
+                    android:enabled="@{!viewModel.countryAndCategoryChecked}"
+                    android:onCheckedChanged="@{(button,checked) -> viewModel.saveSourceSetting(checked)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/countryAndCategoryTextView"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/text_preferences"
+            android:paddingStart="16dp"
+            android:text="@string/country_amp_category"
+            app:layout_constraintTop_toBottomOf="@id/settingsOptions"
+            tools:ignore="RtlSymmetry" />
+
+
+        <LinearLayout
+            android:id="@+id/settingsValues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@id/countryAndCategoryTextView">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/country_field"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="@{viewModel.countryAndCategoryChecked}"
+                android:padding="12dp">
+
+
+                <TextView
+                    android:id="@+id/countryTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:textColorSetter="@{viewModel.countryAndCategoryChecked}" />
+
+                <TextView
+                    android:id="@+id/countryValue_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.countryName}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:textColorSetter="@{viewModel.countryAndCategoryChecked}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View style="@style/Divider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/category_field"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="@{viewModel.countryAndCategoryChecked}"
+                android:padding="12dp">
+
+
+                <TextView
+                    android:id="@+id/categoryTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:duplicateParentState="true"
+                    android:text="@string/category"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:textColorSetter="@{viewModel.countryAndCategoryChecked}" />
+
+                <TextView
+                    android:id="@+id/categoryValue_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.categoryName}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:textColorSetter="@{viewModel.countryAndCategoryChecked}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sourcesTextView"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/settingsValues"
+            android:background="@color/text_preferences"
+            android:paddingStart="16dp"
+            android:text="@string/your_news_sources"
+            app:layout_constraintTop_toBottomOf="@id/settingsValues"
+            tools:ignore="RtlSymmetry" />
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sourcesTextView">
+
+            <LinearLayout
+                android:id="@+id/sourcesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sourcesTextView">
+
+
+                <TextView
+                    android:id="@+id/source_caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/sources"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:textColorSetter="@{viewModel.sourceChecked}" />
+
+
+                <View style="@style/Divider" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewSources"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:disableRecyclerView="@{viewModel.sourceChecked}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:setAdapter="@{adapter}"
+                    app:submitList="@{viewModel.sources}"
+                    tools:listitem="@layout/item_source" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/explain_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="If no source is chosen,\n then the news are gonna be provided by default."
+                android:visibility="invisible"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sourcesTextView" />
+
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end|right"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:contentDescription="@string/add_source"
+                app:borderWidth="0dp"
+                app:icon="@drawable/ic_add_black_24dp"
+                app:iconTint="@android:color/white"
+                app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+                app:setViewVisibility="@{viewModel.sourceChecked}" />
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

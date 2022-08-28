@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.samprojre.screens.newsfeed_screen.NewsViewModel" />
+
+        <variable
+            name="searchQuery"
+            type="String" />
+
+        <variable
+            name="pageSize"
+            type="int" />
+
+        <variable
+            name="adapter"
+            type="com.example.samprojre.screens.newsfeed_screen.newsadapter.NewsAdapter" />
+
+        <variable
+            name="newsLoadingState"
+            type="boolean" />
+
+        <variable
+            name="isDatabaseLoading"
+            type="int" />
+
+        <variable
+            name="itemDecorator"
+            type="com.example.samprojre.base_adapter.ItemDecorator" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/newsFeed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:context=".screens.newsfeed_screen.NewsFeedFragment">
+
+        <com.example.samprojre.apptheme.custom_views.NewsToolbar
+            android:id="@+id/toolbar_newsFeed"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            android:elevation="3dp"
+            android:minHeight="56dp"
+            android:theme="@style/ToolbarStyle"
+            app:collapseIcon="@drawable/ic_arrow_back_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:id="@+id/text_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/newsFeed"
+                android:textColor="#ffff"
+                android:textSize="25sp" />
+
+        </com.example.samprojre.apptheme.custom_views.NewsToolbar>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/newsFeed_refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_newsFeed"
+            app:onRefreshListener="@{()-> viewModel.getNews(searchQuery,pageSize)}"
+            app:refreshing="@{newsLoadingState}">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemDecoration="@{itemDecorator}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:setAdapter="@{adapter}"
+                app:submitList="@{viewModel.newsFeedList.article}"
+                tools:listitem="@layout/item_newsfeed" />
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <include
+            android:id="@+id/errorLayoutNewsFeed"
+            layout="@layout/included_error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_newsFeed" />
+
+        <include
+            android:id="@+id/nothingWasFoundNewsFeed"
+            layout="@layout/include_nothing_was_found"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_newsFeed" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/circularProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{isDatabaseLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

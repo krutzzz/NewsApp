@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.samproj">
+    package="com.example.samprojre">
 
-
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".Singleton"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-
-
-        <activity android:name=".ArticleViewPage">
-
-        </activity>
-        <activity android:name=".Tester">
-
-        </activity>
+        android:supportsRtl="true">
         <activity
-            android:name=".MainActivity"
-            android:configChanges="screenSize|orientation|screenLayout">
+            android:name=".screens.about_screen.AboutActivity"
+            android:exported="false"
+            android:theme="@style/AppThemeBlue"/>
+        <activity
+            android:name=".screens.settings_screens.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/AppThemeBlue" />
+        <activity
+            android:name=".screens.newsdetails_downloaded_screen.NewsDetailDownloaded"
+            android:exported="false"
+            android:theme="@style/AppThemeBlue" />
+        <activity
+            android:name=".screens.newsdetails_screen.NewsDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeBlue" />
+        <activity
+            android:name=".screens.main.MainActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeBlue"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

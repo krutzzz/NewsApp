@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">News</string>
+    <string name="facebook_application_id" translatable="false">169685760965675</string>
+    <string name="articles">News</string>
+
+
+
+    <string name="catalog_hint_no_network_connection">Не связи</string>
+    <string name="Save">Сохранить</string>
+    <string name="AddToFavorites">Добавить в архив</string>
+    <string name="Share">Поделиться</string>
+    <string name="Favorites">Архив</string>
+    <string name="Favorites_added">Уже добавлено</string>
+    <string name="settings_ActionBar">Настройки</string>
+    <string name="downloaded_ActionBar">Скачаные</string>
+    <string name="search_ActionBar">Поиск</string>
+    <string name="news_for_you">Новости для тебя</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="retry">Снова</string>
+    <string name="snack_bar_undo">Отмена</string>
+    <string name="top_headlines">Топ заголовки</string>
+    <string name="settings">Настройки</string>
+    <string name="downloaded">Скачаные</string>
+    <string name="sorry_you_don_t_have_any_articles_downloaded">Простите, у вас нет скачаных новостей</string>
+    <string name="language">Язык</string>
+    <string name="title_of_news">Заголовок</string>
+    <string name="a_time_ago">назад</string>
+    <string name="newsFeed">Лента Новостей</string>
+</resources>

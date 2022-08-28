@@ -2,12 +2,246 @@
     <string name="app_name">News</string>
     <string name="facebook_application_id" translatable="false">169685760965675</string>
     <string name="articles">News</string>
-    <string name="dictionary">Dictionary</string>
-    <string name="Profile">Profile</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="list_item_label_learn_more">Learn More</string>
+    <!--    string name="hello_blank_fragment">Hello blank fragment</string>-->
+    <!--<string name="list_item_label_learn_more">Learn More</string><-->
     <string name="catalog_hint_no_network_connection">No connection</string>
-    <string name="retry" color="@color/blue">Retry</string>
+    <!--    <string name="retry" color="@color/blue">Retry</string>-->
+    <string name="Save">Save</string>
+    <string name="AddToFavorites">Add to favorites</string>
+    <string name="Share">Share</string>
+    <string name="Favorites">Favorites</string>
+    <string name="Favorites_added">Already added</string>
+    <string name="settings_ActionBar">Settings</string>
+    <string name="downloaded_ActionBar">Downloads</string>
+    <string name="search_ActionBar">Search</string>
+    <string name="news_for_you">News for you</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="retry">Retry</string>
+    <string name="snack_bar_undo">Undo</string>
+    <string name="top_headlines">Top Headlines</string>
+    <string name="settings">Settings</string>
+    <string name="downloaded">Downloaded</string>
+    <string name="sorry_you_don_t_have_any_articles_downloaded">Sorry,you don\'t have any articles downloaded</string>
+    <string name="language">Language</string>
+    <string name="title_of_news">Title of News</string>
+    <string name="a_time_ago">a time ago</string>
+    <string name="newsFeed">NewsFeed</string>
+    <string-array name="countries">
+        <item>United Arab Emirates, ae</item>
+        <item>Argentina, ar</item>
+        <item>Austria, at</item>
+        <item>Australia, au</item>
+        <item>Belgium, be</item>
+        <item>Bulgaria, bg</item>
+        <item>Brazil, br</item>
+        <item>Canada, ca</item>
+        <item>Switzerland, ch</item>
+        <item>China, cn</item>
+        <item>Columbia, co</item>
+        <item>Cuba, cu</item>
+        <item>Chezh Republic, cz</item>
+        <item>Germany, de</item>
+        <item>Egypt, eg</item>
+        <item>France, fr</item>
+        <item>Great Britain, gb</item>
+        <item>Greece, gr</item>
+        <item>Honkong, hk</item>
+        <item>Hungary, hu</item>
+        <item>Indonesia, id</item>
+        <item>Ireland, ie</item>
+        <item>Israeli, il</item>
+        <item>India, in</item>
+        <item>Italy, it</item>
+        <item>Japan, jp</item>
+        <item>North Korea, kr</item>
+        <item>Lithuania, lt</item>
+        <item>Latvia, lv</item>
+        <item>Morocco, ma</item>
+        <item>Mexico, mx</item>
+        <item>Malaysia, my</item>
+        <item>Nigeria, ng</item>
+        <item>Netherlands, nl</item>
+        <item>Norway, no</item>
+        <item>New Zealand, nz</item>
+        <item>Philippines, ph</item>
+        <item>Poland, pl</item>
+        <item>Portugal, pt</item>
+        <item>Romania, ro</item>
+        <item>Serbia, rs</item>
+        <item>Russia, ru</item>
+        <item>South Africa, sa</item>
+        <item>Switzerland, se</item>
+        <item>Singapore, sg</item>
+        <item>Slovenia, si</item>
+        <item>Slovakia, sk</item>
+        <item>Thailand, th</item>
+        <item>Turkey, tr</item>
+        <item>Taiwan, tw</item>
+        <item>Ukraine, ua</item>
+        <item>United States, us</item>
+        <item>Venezuela, ve</item>
+
+    </string-array>
+    <string-array name="countries_1">
+        <item>United Arab Emirates(ae)</item>
+        <item>Argentina(ar)</item>
+        <item>Austria(at)</item>
+        <item>Australia(au)</item>
+        <item>Belgium(be)</item>
+        <item>Bulgaria(bg)</item>
+        <item>Brazil(br)</item>
+        <item>Canada(ca)</item>
+        <item>Switzerland(ch)</item>
+        <item>China(cn)</item>
+        <item>Columbia(co)</item>
+        <item>Cuba(cu)</item>
+        <item>Chezh Republic(cz)</item>
+        <item>Germany(de)</item>
+        <item>Egypt(eg)</item>
+        <item>France(fr)</item>
+        <item>Great Britain(gb)</item>
+        <item>Greece(gr)</item>
+        <item>Honkong(hk)</item>
+        <item>Hungary(hu)</item>
+        <item>Indonesia(id)</item>
+        <item>Ireland(ie)</item>
+        <item>Israeli(il)</item>
+        <item>India(in)</item>
+        <item>Italy(it)</item>
+        <item>Japan(jp)</item>
+        <item>North Korea(kr)</item>
+        <item>Lithuania(lt)</item>
+        <item>Latvia(lv)</item>
+        <item>Morocco(ma)</item>
+        <item>Mexico(mx)</item>
+        <item>Malaysia(my)</item>
+        <item>Nigeria(ng)</item>
+        <item>Netherlands(nl)</item>
+        <item>Norway(no)</item>
+        <item>New Zealand(nz)</item>
+        <item>Philippines(ph)</item>
+        <item>Poland(pl)</item>
+        <item>Portugal(pt)</item>
+        <item>Romania(ro)</item>
+        <item>Serbia(rs)</item>
+        <item>Russia(ru)</item>
+        <item>South Africa(sa)</item>
+        <item>Switzerland(se)</item>
+        <item>Singapore(sg)</item>
+        <item>Slovenia(si)</item>
+        <item>Slovakia(sk)</item>
+        <item>Thailand(th)</item>
+        <item>Turkey(tr)</item>
+        <item>Taiwan(tw)</item>
+        <item>Ukraine(ua)</item>
+        <item>United States(us)</item>
+        <item>Venezuela(ve)</item>
+
+    </string-array>
+    <string-array name="countries_2">
+        <item>ae</item>
+        <item>ar</item>
+        <item>at</item>
+        <item>au</item>
+        <item>be</item>
+        <item>bg</item>
+        <item>br</item>
+        <item>ca</item>
+        <item>ch</item>
+        <item>cn</item>
+        <item>co</item>
+        <item>cu</item>
+        <item>cz</item>
+        <item>de</item>
+        <item>eg</item>
+        <item>fr</item>
+        <item>gb</item>
+        <item>gr</item>
+        <item>hk</item>
+        <item>hu</item>
+        <item>id</item>
+        <item>ie</item>
+        <item>il</item>
+        <item>in</item>
+        <item>it</item>
+        <item>jp</item>
+        <item>kr</item>
+        <item>lt</item>
+        <item>lv</item>
+        <item>ma</item>
+        <item>mx</item>
+        <item>my</item>
+        <item>ng</item>
+        <item>nl</item>
+        <item>no</item>
+        <item>nz</item>
+        <item>ph</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>rs</item>
+        <item>ru</item>
+        <item>sa</item>
+        <item>se</item>
+        <item>sg</item>
+        <item>si</item>
+        <item>sk</item>
+        <item>th</item>
+        <item>tr</item>
+        <item>tw</item>
+        <item>ua</item>
+        <item>us</item>
+        <item>ve</item>
+
+    </string-array>
+
+
+    <string-array name="categories">
+        <item>business</item>
+        <item>entertainment</item>
+        <item>general</item>
+        <item>health</item>
+        <item>science</item>
+        <item>sports</item>
+        <item>technology</item>
+
+
+    </string-array>
+
+    <string name="news_image">News image</string>
+    <string name="date_icon">Date icon</string>
+    <string name="options">Options</string>
+    <string name="toastMessageCannotBeShared">Hmm.. Sorry, \nCannot be Shared</string>
+    <string name="shareMessage">Share from the News App</string>
+    <string name="shareChooser">Share with:</string>
+    <string name="your_favourites_list_is_empty">Your favourites list is empty...</string>
+
+    <string name="your_downloads_list_is_empty">Your downloads list is empty...</string>
+
+    <string name="download_some_articles_for_later">Download some articles for later)</string>
+    <string name="add_some_articles_for_later">Add some articles for later)</string>
+    <string name="error_image">Error image</string>
+    <string name="search_query_hint">Search Latest News...</string>
+    <string name="preferences">Preferences</string>
+    <string name="themes">Themes</string>
+    <string name="about">About</string>
+    <string name="article_image">Article image</string>
+    <string name="source_and_time_ago">%s%s \n%s</string>
+    <string name="item_was_removed">Item was removed</string>
+    <string name="add_source">Add source</string>
+    <string name="your_news_sources">Your news sources</string>
+    <string name="country_amp_category"><![CDATA[Country&Category]]></string>
+    <string name="set_your_preferences">Set your preferences</string>
+    <string name="choose_news_by_country_amp_category"><![CDATA[News by country&category]]></string>
+    <string name="choose_news_by_source">News by source</string>
+    <string name="category">Category</string>
+    <string name="country">Country</string>
+    <string name="sources">Sources:</string>
+    <string name="delete_source">Delete source</string>
+    <string name="sourcesr">Sources</string>
+    <string name="no_sources_found">No sources found</string>
+    <string name="categorySources">Category:</string>
 </resources>

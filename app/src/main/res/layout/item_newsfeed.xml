@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="item"
+            type="com.example.samprojre.data.model.newsapi.Article" />
+
+        <variable
+            name="itemListener"
+            type="com.example.samprojre.base_adapter.OnArticleItemClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <TextView
+            android:id="@+id/topheadelines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/top_headlines"
+            android:textColor="@color/colorTextTitle"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setTopHeadlines="@{position}" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:clipChildren="false"
+            android:onClick="@{()->itemListener.onItemClick(item,position)}"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="@dimen/cardview_default_elevation"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topheadelines">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/relativelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/articleImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:contentDescription="@string/news_image"
+                    android:scaleType="centerCrop"
+                    android:transitionName="hi"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:progressView="@{loadPhotoProgressBar}"
+                    app:setImage="@{item.urlToImage}"
+                    tools:ignore="UnusedAttribute" />
+
+                <ImageView
+                    android:id="@+id/shadow_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:src="@drawable/bottom_shadow"
+                    app:layout_constraintBottom_toBottomOf="@id/articleImg"
+                    tools:ignore="ContentDescription" />
+
+                <ProgressBar
+                    android:id="@+id/loadPhotoProgressBar"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/articleImg"
+                    app:layout_constraintTop_toTopOf="@id/articleImg" />
+
+                <TextView
+                    android:id="@+id/authorTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@+id/titleTextView"
+                    android:layout_alignTop="@+id/layoutDate"
+                    android:layout_alignEnd="@+id/layoutDate"
+                    android:layout_marginEnd="160dp"
+                    android:drawablePadding="10dp"
+                    android:ellipsize="end"
+                    android:gravity="bottom"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@{item.author}"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintEnd_toStartOf="@id/layoutDate"
+                    app:layout_constraintStart_toStartOf="@id/titleTextView"
+                    app:layout_constraintTop_toTopOf="@id/layoutDate" />
+
+                <FrameLayout
+                    android:id="@+id/layoutDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/articleImg"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/round_white"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/articleImg"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:contentDescription="@string/date_icon"
+                        android:src="@drawable/ic_date" />
+
+                    <TextView
+                        android:id="@+id/publishedAtTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="27dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="01 September 2003"
+                        android:textColor="#606060"
+                        app:setDate="@{item.publishedAt}" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/articleImg"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="16dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@{item.title}"
+                    android:textColor="@color/colorTextTitle"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/articleImg" />
+
+                <TextView
+                    android:id="@+id/descTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:maxLines="2"
+                    android:text="@{item.description}"
+                    app:layout_constraintEnd_toEndOf="@id/titleTextView"
+                    app:layout_constraintStart_toStartOf="@id/titleTextView"
+                    app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+                <TextView
+                    android:id="@+id/sourceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/descTextView"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawablePadding="10dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-light"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@{item.sourceName.name}"
+                    android:textColor="@color/colorTextTitle"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/descTextView" />
+
+                <TextView
+                    android:id="@+id/timeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/descTextView"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@id/sourceTextView"
+                    android:drawablePadding="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Time"
+                    app:layout_constraintStart_toEndOf="@id/sourceTextView"
+                    app:layout_constraintTop_toBottomOf="@id/descTextView"
+                    app:setTime="@{item.publishedAt}" />
+
+                <ImageView
+                    android:id="@+id/optionsIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="@string/options"
+                    android:focusable="true"
+                    android:onClick="@{()->itemListener.onOptionsClick(item)}"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_dots_navigation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/descTextView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

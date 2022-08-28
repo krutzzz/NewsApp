@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/newsFragment"
-        android:icon="@drawable/ic_news"
-        android:title="@string/articles"/>
 
     <item
-        android:id="@+id/ProfileFragment"
-        android:icon="@drawable/ic_from_web_2"
-        android:title="@string/Profile"/>
+        android:id="@+id/NewsFeedFragment"
+        android:icon="@drawable/ic_newspaper_2nd_option"
+        android:title="@string/articles" />
+
+    <item
+        android:id="@+id/FavoritesFragment"
+        android:icon="@drawable/ic_favorites_2nd"
+        android:title="@string/Favorites"/>
+
+    <item
+        android:id="@+id/DownloadedFragment"
+        android:icon="@drawable/ic_downloads_3d_option_com"
+        android:title="@string/downloaded"/>
 
 </menu>

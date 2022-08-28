@@ -1,55 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/background">
+<?xml version="1.0" encoding="utf-8"?><!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
+    </data>
 
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainActivityContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="@color/background"
+        android:fitsSystemWindows="true"
+        tools:context=".screens.main.MainActivity">
 
-        <androidx.core.widget.NestedScrollView
+
+        <ImageView
+            android:id="@+id/imageViewChangeTheme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <include
+            android:id="@+id/fragment_container"
+            layout="@layout/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation"/>
 
-                <TextView
-                    android:id="@+id/topheadelines"
-                    android:textColor="@color/colorTextTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="Top Headlines"
-                    android:fontFamily="sans-serif-light"
-                    android:textSize="17sp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="10dp"
-                    android:visibility="invisible"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:scrollbars="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </androidx.recyclerview.widget.RecyclerView>
+        <com.example.samprojre.apptheme.custom_views.NewsBottomNavigation
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?attr/colorPrimary"
+            style="@style/Widget.App.BottomNavigationViewBlue"
+            app:itemIconTint="@drawable/tab_selector"
+            app:itemTextColor="@drawable/tab_selector_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_navigation" />
 
-            </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

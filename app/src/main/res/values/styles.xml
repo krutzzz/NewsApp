@@ -1,27 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+<!--    Theme.Material3.Light.NoActionBar-->
+    <style name="AppThemeBlue" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">#ffff</item>
+        <item name="colorPrimary">@color/colorBlueTheme</item>
+        <item name="colorPrimaryDark">@color/colorBlueThemeDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorPrimaryVariant">#000000</item>
-        <item name="colorSecondary">#2962FF</item>
-        <item name="colorSecondaryVariant">#0039CB</item>
-        <item name="colorOnSecondary">#FFFFFF</item>
-        <item name="colorError">#F44336</item>
-        <item name="colorOnError">#FFFFFF</item>
-        <item name="colorSurface">#FFFFFF</item>
-        <item name="colorOnSurface">#212121</item>
-        <item name="android:colorBackground">@color/background</item>
-        <item name="colorOnBackground">#212121</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewBlue</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+    </style>
+
+
+    <style name="AppThemeGreen" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorControlNormal">#ffff</item>
+        <item name="colorPrimary">@color/colorGreenTheme</item>
+        <item name="colorPrimaryDark">@color/colorGreenThemeDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewGreen</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppThemeGreen.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeBrown" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorControlNormal">#ffff</item>
+        <item name="colorPrimary">@color/colorBrownTheme</item>
+        <item name="colorPrimaryDark">@color/colorBrownThemeDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewBrown</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppThemeBrown.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewBrown</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemePink" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorControlNormal">#ffff</item>
+        <item name="colorPrimary">@color/colorPinkTheme</item>
+        <item name="colorPrimaryDark">@color/colorPinkThemeDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewPink</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppThemePink.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 
 
 
 
+
+    <style name="Widget.App.BottomNavigationViewBlue" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationViewBlueTheme</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationViewGreen" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationViewGreenTheme</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationViewBrown" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationViewBrownTheme</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationViewPink" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationViewPinkTheme</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationViewBlueTheme" parent="">
+        <item name="colorSurface">@color/colorBlueThemeDark</item>
+        <item name="colorOnSurfaceVariant">@color/colorAccent</item>
+        <item name="colorSecondaryContainer">@color/colorBlueSecondaryContainer</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationViewGreenTheme" parent="">
+        <item name="colorSurface">@color/colorGreenThemeDark</item>
+        <item name="colorOnSurfaceVariant">@color/colorAccent</item>
+        <item name="colorSecondaryContainer">@color/colorGreenSecondaryContainer</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationViewBrownTheme" parent="">
+        <item name="colorSurface">@color/colorBrownThemeDark</item>
+        <item name="colorOnSurfaceVariant">@color/colorAccent</item>
+        <item name="colorSecondaryContainer">@color/colorBrownSecondaryContainer</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationViewPinkTheme" parent="">
+        <item name="colorSurface">@color/colorPinkThemeDark</item>
+        <item name="colorOnSurfaceVariant">@color/colorAccent</item>
+        <item name="colorSecondaryContainer">@color/colorPinkSecondaryContainer</item>
+    </style>
+
+
+
+    <style name="AppThemeBlue.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="MyAppBarLayoutTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Toolbar" parent="android:Theme.Holo">
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_black_24dp</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorSurfaceVariant">@color/text_preferences</item>
+    </style>
+
+
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <item name="colorAccent">#ffff</item>
     </style>
 
 </resources>

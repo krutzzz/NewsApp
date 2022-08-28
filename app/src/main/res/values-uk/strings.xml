@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Новини</string>
+    <string name="facebook_application_id" translatable="false">169685760965675</string>
+    <string name="articles">Новини</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <string name="catalog_hint_no_network_connection">Нема зв\'язку</string>
+
+    <string name="Save">Завантажити</string>
+    <string name="AddToFavorites">Додати до архіву</string>
+    <string name="Share">Поділитись</string>
+    <string name="Favorites">Архів</string>
+    <string name="Favorites_added">Додано</string>
+    <string name="settings_ActionBar">Налаштування</string>
+    <string name="downloaded_ActionBar">Downloaded</string>
+    <string name="search_ActionBar">Пошук</string>
+    <string name="news_for_you">Новини для тебе</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="retry">Повторити спробу</string>
+    <string name="snack_bar_undo">Скасувати</string>
+    <string name="top_headlines">Top Headlines</string>
+    <string name="settings">Налаштування</string>
+    <string name="downloaded">Завантажені</string>
+    <string name="sorry_you_don_t_have_any_articles_downloaded">Вибачте,ви немаєте завантаженних статтей</string>
+    <string name="language">Мова</string>
+    <string name="title_of_news">Заголовок</string>
+    <string name="a_time_ago">тому</string>
+    <string name="newsFeed">Стрічка Новин</string>
+
+</resources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.samprojre.screens.favorites_screen.FavoritesViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.example.samprojre.screens.favorites_screen.favoritesadapter.FavoritesAdapter" />
+
+        <variable
+            name="isDatabaseLoading"
+            type="int" />
+
+        <variable
+            name="itemDecoration"
+            type="com.example.samprojre.base_adapter.ItemDecorator" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/FavoritesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.favorites_screen.FavouritesFragment">
+
+
+        <com.example.samprojre.apptheme.custom_views.NewsToolbar
+            android:id="@+id/toolbar_favorites"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/Favorites"
+                android:textColor="#ffff"
+                android:textSize="25sp" />
+
+        </com.example.samprojre.apptheme.custom_views.NewsToolbar>
+
+        <include
+            android:id="@+id/empty_container_favorites"
+            layout="@layout/empty_favorites"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_favorites" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:itemDecoration="@{itemDecoration}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_favorites"
+            app:setAdapter="@{adapter}"
+            app:submitList="@{viewModel.favoritesList}"
+            tools:listitem="@layout/item_favorites" />
+
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/circularProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{isDatabaseLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

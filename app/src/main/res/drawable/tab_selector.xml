@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:state_selected="true"
-        android:color="@color/twitter_blue" />
-
-    <item
-        android:state_selected="false"
-        android:color="@color/deep_grey"
-        />
-
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"
+        android:color="@color/background" />
+    <item android:color="@color/iconColor" />
 </selector>

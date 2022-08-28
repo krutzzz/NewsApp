@@ -2,19 +2,25 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".screens.main.MainActivity">
 
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search"
         android:orderInCategory="100"
-        android:title="Search"
+        android:title="@string/search_ActionBar"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always" />
+        app:showAsAction="collapseActionView|ifRoom"
+        android:theme="@android:style/Theme.Holo.Light.DarkActionBar"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="Settings"
-        app:showAsAction="never"/>
+        android:title="@string/settings_ActionBar"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="always"/>
+
+
+
+
 </menu>

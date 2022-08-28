@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.samprojre.screens.downloaded_screen.DownloadsViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.example.samprojre.screens.downloaded_screen.DownloadsAdapter" />
+
+        <variable
+            name="itemDecorator"
+            type="com.example.samprojre.base_adapter.ItemDecorator" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/DownloadsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.downloaded_screen.DownloadedFragment">
+
+
+        <com.example.samprojre.apptheme.custom_views.NewsToolbar
+            android:id="@+id/downloadsToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/text_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Downloads"
+                android:textColor="#ffff"
+                android:textSize="25sp" />
+
+        </com.example.samprojre.apptheme.custom_views.NewsToolbar>
+
+        <include
+            android:id="@+id/empty_container_downloads"
+            layout="@layout/empty_downloaded"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/downloadsToolbar" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewDownloads"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:itemDecoration="@{itemDecorator}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/downloadsToolbar"
+            app:setAdapter="@{adapter}"
+            app:submitList="@{viewModel.downloadsList}"
+            tools:listitem="@layout/item_downloads" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
